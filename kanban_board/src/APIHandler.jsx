@@ -19,7 +19,7 @@ class APIHandler {
     const response = await fetch(apiUrl+'/api/cards', {
       method: 'POST',
       body: JSON.stringify({
-        id: id,
+        id: cardObj.id,
         title: cardObj.title,
         category: cardObj.category
       }),
@@ -33,7 +33,7 @@ class APIHandler {
     await fetch(apiUrl+`/api/cards/${cardObj.id}`, {
       method: 'PUT',
       body: JSON.stringify({
-        id: id,
+        id: cardObj.id,
         title: cardObj.title,
         category: cardObj.category
       }),
