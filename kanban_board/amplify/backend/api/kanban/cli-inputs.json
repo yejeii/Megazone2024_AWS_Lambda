@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "paths": {
+    "/api/cards": {
+      "name": "/api/cards",
+      "lambdaFunction": "amplifyTriggera5884937",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "guest": [
+          "create"
+        ]
+      }
+    }
+  }
+}
