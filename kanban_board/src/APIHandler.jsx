@@ -1,14 +1,17 @@
+const apiUrl = process.API_URL;
+
 class APIHandler {
+
   async getCards() {
     // Fetch cards from the server
-    const response = await fetch('/api/cards');
+    const response = await fetch(apiUrl+'/api/cards');
     return response.json();
   }
 
   async postCard(cardObj) {
     console.log(cardObj);
     // Post new card to the server
-    const response = await fetch('/api/cards', {
+    const response = await fetch(apiUrl+'/api/cards', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cardObj),
@@ -19,7 +22,7 @@ class APIHandler {
 
   async putCard(cardObj) {
     // Update existing card
-    await fetch(`/api/cards/${cardObj.id}`, {
+    await fetch(apiUrl+`/api/cards/${cardObj.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cardObj),
@@ -28,7 +31,7 @@ class APIHandler {
 
   async deleteCard(id) {
     // Delete card by ID
-    await fetch(`/api/cards/${id}`, {
+    await fetch(apiUrl+`/api/cards/${id}`, {
       method: 'DELETE',
     });
   }
