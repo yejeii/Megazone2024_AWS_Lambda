@@ -113,7 +113,7 @@ function App() {
                     <Column
                         key={category}
                         category={category}
-                        cards={cards.filter(card => card.category === category)}
+                        cards={Array.isArray(cards) ? cards.filter(card => card.category === category) : []}
                         onCreateCard={createCard}
                         onDeleteCard={deleteCard}
                         onChangeCard={onChangeCard}
