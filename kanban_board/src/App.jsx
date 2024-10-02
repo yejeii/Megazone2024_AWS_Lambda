@@ -25,7 +25,7 @@ function App() {
     const createCard = (category) => {
         const newCard = { title: '', id: Date.now(), category }; // Temporary ID
         setCards(prevCards => [...prevCards, newCard]);
-        registerCard(newCard);
+        if(newCard.title) {registerCard(newCard);}
     };
 
     const registerCard = async (cardObj) => {
