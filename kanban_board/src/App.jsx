@@ -4,6 +4,8 @@ import Column from './Column';
 import APIHandler from './APIHandler.jsx';
 import '../style.scss';
 import './App.css';
+import { Auth, API } from 'aws-amplify';
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
 const API = new APIHandler();
 
