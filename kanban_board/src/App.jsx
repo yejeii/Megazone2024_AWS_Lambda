@@ -105,7 +105,7 @@ function App() {
         <>
             <nav>
                 <div></div>
-                <div>Kanban Board</div>
+                <div>AWS 칸반 보드</div>
                 <div></div>
             </nav>
             <div className="column-container">
