@@ -1,4 +1,6 @@
-const apiUrl = 'https://6kjaur2wze.execute-api.us-east-1.amazonaws.com';
+import config from './config.js';
+
+const apiUrl = config.api.invokeUrl;
 
 class APIHandler {
 
