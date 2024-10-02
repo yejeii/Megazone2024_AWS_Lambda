@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const Card = ({ card, onDelete, onChange, onDragStart, onDragEnd }) => {
-    const [title, setTitle] = useState(card.title); // Local state for the title
-    const textareaRef = useRef(null); // Reference to the textarea
+    const [title, setTitle] = useState(card.title);
+    const textareaRef = useRef(null);
 
-    // Update the title when the card prop changes
     useEffect(() => {
         setTitle(card.title);
     }, [card.title]);
@@ -24,7 +23,7 @@ const Card = ({ card, onDelete, onChange, onDragStart, onDragEnd }) => {
             draggable
             onDragStart={onDragStart}
             onDragEnd={onDragEnd}
-            id={`card-id-${card.id}`} // ID for dragging
+            id={`card-id-${card.id}`}
         >
             <div className="card-delete" onClick={() => onDelete(card.id)}>x</div>
             <textarea
@@ -32,10 +31,10 @@ const Card = ({ card, onDelete, onChange, onDragStart, onDragEnd }) => {
                 rows={3}
                 cols={1}
                 name="title"
-                value={title} // Bind the title directly to the local state
+                value={title}
                 className="card-title"
-                onChange={handleChange} // Call handleChange to update title on change
-                onBlur={handleBlur} // Call handleBlur when textarea loses focus
+                onChange={handleChange}
+                onBlur={handleBlur} // Trigger save on blur
             />
         </div>
     );

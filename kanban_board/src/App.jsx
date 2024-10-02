@@ -22,8 +22,8 @@ function App() {
         }
     };
 
-    const createCard = (category, title) => {
-        const newCard = { title, id: Date.now(), category }; // 사용자 입력값 사용
+    const createCard = (category) => {
+        const newCard = { title: '', id: Date.now(), category }; // Temporary ID
         setCards(prevCards => [...prevCards, newCard]);
         registerCard(newCard);
     };
@@ -44,13 +44,12 @@ function App() {
         await API.putCard(cardObj);
     };
 
-    const onChangeCard = async (card, newTitle) => {
+    const onChangeCard = (card, newTitle) => {
         const updatedCard = { ...card, title: newTitle };
         if (newTitle.length > 0) {
-            await updateCard(updatedCard); // Ensure this function calls the APIHandler to update the card
-            setCards(prevCards => prevCards.map(c => c.id === card.id ? updatedCard : c)); // Update the local state
+            updateCard(updatedCard);
         } else {
-            await deleteCard(card.id); // Delete card if the title is empty
+            deleteCard(card.id);
         }
     };
 
@@ -105,7 +104,7 @@ function App() {
         <>
             <nav>
                 <div></div>
-                <div>AWS 칸반 보드</div>
+                <div>Kanban Board</div>
                 <div></div>
             </nav>
             <div className="column-container">

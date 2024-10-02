@@ -14,7 +14,7 @@ const Column = ({ category, cards, onCreateCard, onDeleteCard, onChangeCard, onD
             <div className="card card-create" onClick={() => onCreateCard(category)}>+</div>
             <section
                 className="card-container"
-                onDragOver={(event) => event.preventDefault()} // Allow drop
+                onDragOver={(event) => event.preventDefault()}
                 onDrop={handleDrop}
             >
                 {cards.map(card => (
@@ -23,7 +23,7 @@ const Column = ({ category, cards, onCreateCard, onDeleteCard, onChangeCard, onD
                         card={card}
                         onDelete={onDeleteCard}
                         onChange={onChangeCard}
-                        onDragStart={onDragStart} // Pass down drag event handler
+                        onDragStart={onDragStart}
                     />
                 ))}
             </section>
