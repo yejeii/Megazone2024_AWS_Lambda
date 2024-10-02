@@ -1,4 +1,4 @@
-const apiUrl = process.API_URL;
+const apiUrl = 'https://6d0mj8j2t8.execute-api.us-east-1.amazonaws.com/prod';
 
 class APIHandler {
 
