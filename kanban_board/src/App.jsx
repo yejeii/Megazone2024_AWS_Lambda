@@ -4,9 +4,11 @@ import Column from './Column';
 import APIHandler from './APIHandler.jsx';
 import '../style.scss';
 import './App.css';
-import { Auth, API } from 'aws-amplify';
-import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Amplify } from 'aws-amplify';
+import { AmplifyAuthenticator, AmplifySignIn, Heading } from '@aws-amplify/ui-react';
+import awsconfig from './aws-exports';
 
+Amplify.configure(awsconfig);
 const API = new APIHandler();
 
 function App() {
@@ -104,25 +106,40 @@ function App() {
 
     return (
         <>
-            <nav>
-                <div></div>
-                <div>Kanban Board</div>
-                <div></div>
-            </nav>
-            <div className="column-container">
-                {['todo', 'ongoing', 'test', 'done'].map(category => (
-                    <Column
-                        key={category}
-                        category={category}
-                        cards={Array.isArray(cards) ? cards.filter(card => card.category === category) : []}
-                        onCreateCard={createCard}
-                        onDeleteCard={deleteCard}
-                        onChangeCard={onChangeCard}
-                        onDragStart={onDragStart} // Pass drag event handler
-                        onDrop={cardOnDrop} // Pass drop handler
-                    />
-                ))}
-            </div>
+            <AmplifyAuthenticator>
+                <AmplifySignIn
+                    slot="sign-in"
+                    headerText="Kanban Dashboard Sign In"
+                    usernameAlias="email"
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                >
+                    <div slot="secondary-footer-content"></div>
+                </AmplifySignIn>
+
+                <nav>
+                    <div></div>
+                    <div>Kanban Board</div>
+                    <div></div>
+                </nav>
+                <div className="column-container">
+                    {['todo', 'ongoing', 'test', 'done'].map(category => (
+                        <Column
+                            key={category}
+                            category={category}
+                            cards={Array.isArray(cards) ? cards.filter(card => card.category === category) : []}
+                            onCreateCard={createCard}
+                            onDeleteCard={deleteCard}
+                            onChangeCard={onChangeCard}
+                            onDragStart={onDragStart} // Pass drag event handler
+                            onDrop={cardOnDrop} // Pass drop handler
+                        />
+                    ))}
+                </div>
+            </AmplifyAuthenticator>
+
         </>
     );
 }

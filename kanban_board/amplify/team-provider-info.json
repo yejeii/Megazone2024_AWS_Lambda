@@ -10,6 +10,11 @@
       "StackName": "amplify-kanbanboard-dev-e5960",
       "StackId": "arn:aws:cloudformation:us-east-1:430118855167:stack/amplify-kanbanboard-dev-e5960/c1371790-80d4-11ef-988d-1296596188a3",
       "AmplifyAppId": "d2hk4gb3l2pukb"
+    },
+    "categories": {
+      "auth": {
+        "kanbanboard58236ada": {}
+      }
     }
   }
 }
