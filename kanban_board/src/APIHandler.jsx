@@ -5,7 +5,12 @@ class APIHandler {
   async getCards() {
     // Fetch cards from the server
     const response = await fetch(apiUrl+'/api/cards');
-    return response.json();
+    let datas = await response.json();
+    if (datas.length === 0) {
+      return null;
+    } else {
+      return datas;
+    }
   }
 
   async postCard(cardObj) {
@@ -13,8 +18,11 @@ class APIHandler {
     // Post new card to the server
     const response = await fetch(apiUrl+'/api/cards', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(cardObj),
+      body: JSON.stringify({
+        id: id,
+        title: cardObj.title,
+        category: cardObj.category
+      }),
     });
     const result = await response.json();
     return result.id; // Assuming the server returns the new card's ID
@@ -24,8 +32,11 @@ class APIHandler {
     // Update existing card
     await fetch(apiUrl+`/api/cards/${cardObj.id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(cardObj),
+      body: JSON.stringify({
+        id: id,
+        title: cardObj.title,
+        category: cardObj.category
+      }),
     });
   }
 
@@ -33,6 +44,9 @@ class APIHandler {
     // Delete card by ID
     await fetch(apiUrl+`/api/cards/${id}`, {
       method: 'DELETE',
+      body: JSON.stringify({
+        id: id
+      })
     });
   }
 }
