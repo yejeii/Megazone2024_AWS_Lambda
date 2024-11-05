@@ -1,0 +1,33 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-kanbanboard-dev-e5960-authRole",
+      "UnauthRoleArn": "arn:aws:iam::430118855167:role/amplify-kanbanboard-dev-e5960-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::430118855167:role/amplify-kanbanboard-dev-e5960-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-kanbanboard-dev-e5960-deployment",
+      "UnauthRoleName": "amplify-kanbanboard-dev-e5960-unauthRole",
+      "StackName": "amplify-kanbanboard-dev-e5960",
+      "StackId": "arn:aws:cloudformation:us-east-1:430118855167:stack/amplify-kanbanboard-dev-e5960/c1371790-80d4-11ef-988d-1296596188a3",
+      "AmplifyAppId": "d2hk4gb3l2pukb",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-kanbanboard-dev-e5960-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "auth": {
+        "kanbanboard58236ada": {}
+      },
+      "function": {
+        "amplifyTriggera5884937": {
+          "deploymentBucketName": "amplify-kanbanboard-dev-e5960-deployment",
+          "s3Key": "amplify-builds/amplifyTriggera5884937-68515a5263776e443032-build.zip"
+        }
+      },
+      "storage": {
+        "amplify": {}
+      },
+      "api": {
+        "kanban": {}
+      }
+    }
+  }
+}
