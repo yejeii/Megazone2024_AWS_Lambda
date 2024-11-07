@@ -1,3 +1,9 @@
 .idea
 .vscode
 node_modules
+logs/debug/*
+logs/error/*
+logs/except/*
+logs/info/*
+logs/warn/*
+metrics/*
