@@ -13,11 +13,10 @@ const login = (app) => {
         if (!username || !password) {
             return res.status(400).json({ message: 'Username and password are required' });
         }
-        console.log(username, password);
 
         // 받은 요청에서 db 에서 가져왔다고 가정 (로그인정보)
         const user = findUser(username);
-        console.log("Retrieved User:", user);
+        console.log("User retrieved!");
 
         if(!user || user.password !== password) {
             return res.status(401).send({ error: 'Invalid username or password' });

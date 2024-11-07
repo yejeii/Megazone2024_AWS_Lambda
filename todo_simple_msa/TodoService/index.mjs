@@ -10,6 +10,19 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+// Middleware to capture the response body
+app.use((req, res, next) => {
+    const originalJson = res.json;
+
+    res.json = function (body) {
+        res.locals.body = body; // Capture the response body
+        return originalJson.call(this, body); // Call the original `res.json` method
+    };
+
+    next();
+});
+
 app.use(morganMiddleware);          // 요청 처리 로깅
 app.use(metricsMiddleware);         // Prometheus metrics 기록
 app.use(errorMiddleware);           // 에러 미들웨어 & 에러 로깅

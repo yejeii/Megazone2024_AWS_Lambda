@@ -26,7 +26,6 @@ export const taskCRUD = (app) => {
 
     // 사용자별 모든 작업 조회
     app.get('/tasks', auth, (req, res) => {
-        console.log(req.user);
         const userId = req.user.id;
 
         // Filter tasks for the current user

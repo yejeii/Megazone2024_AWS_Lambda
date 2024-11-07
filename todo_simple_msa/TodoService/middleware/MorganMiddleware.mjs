@@ -5,7 +5,9 @@ import morgan from "morgan";                // Express 서버에서 발생하는
 import logger from "../config/logger.mjs";
 
 const morganMiddleware = morgan((tokens, req, res) => {
-    const logMessage = `[${tokens.method(req, res)}] ${tokens.url(req, res)} | ${tokens.status(req, res)} | ${tokens.res(req, res, "content-length")} - ${tokens["response-time"](req, res)} ms | [Response] ${JSON.stringify(req.body)}`;
+    const responseBody = res.locals.body || {}; // Access the captured response body
+
+    const logMessage = `[${tokens.method(req, res)}] ${tokens.url(req, res)} | ${tokens.status(req, res)} | ${tokens.res(req, res, "content-length")} - ${tokens["response-time"](req, res)} ms | [Response] ${JSON.stringify(responseBody)}`;
     const statusCode = res.statusCode;
 
     // 응답 상태가 500 미만인지 확인(성공 응답)
