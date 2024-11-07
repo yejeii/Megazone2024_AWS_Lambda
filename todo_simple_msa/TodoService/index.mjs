@@ -5,11 +5,20 @@ import morganMiddleware from './middleware/MorganMiddleware.mjs';
 import { metricsMiddleware, metricsEndpoint } from "./config/metrics.mjs";
 import { login as setUpLoginRoute } from './routes/login.mjs';
 import { taskCRUD as setUpTaskRoute } from "./routes/tasks.mjs";
+import cors from 'cors';        // CORS 패키지
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+// 특정 도메인 요청 허용 CORS 설정
+const corsOptions = {
+    origin: 'http://example.com',   // 허용할 도메인
+    optionsSuccessStatus: 200       // 일부 브라우저에서의 CORS 요청 실패 방지
+};
+
+app.use(cors(corsOptions));
 
 // Middleware to capture the response body
 app.use((req, res, next) => {
