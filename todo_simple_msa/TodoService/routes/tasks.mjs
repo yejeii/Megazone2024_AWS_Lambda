@@ -37,6 +37,28 @@ export const taskCRUD = (app) => {
                 tasks: userTasks,
             }
         })
+
+        // 클라이언트가 받을 data 형식
+        // {
+        //     "code": 200,
+        //     "message": "성공적으로 작업 조회가 처리되었습니다.",
+        //     "data": {
+        //         "tasks": [
+        //             {
+        //                 "id": 1,
+        //                 "title": "숙제하기",
+        //                 "completed": false,
+        //                 "userId": 2
+        //             },
+        //             {
+        //                 "id": 2,
+        //                 "title": "코코넛 까기",
+        //                 "completed": false,
+        //                 "userId": 2
+        //             }
+        //         ]
+        //     }
+        // }
     });
 
     // 특정 작업 조회
@@ -83,6 +105,20 @@ export const taskCRUD = (app) => {
                 tasks: newTask,
             }
         })
+
+        // 클라이언트가 받을 data 형식
+        // {
+        //   "code": 201,
+        //   "message": "성공적으로 작업 처리가 되었습니다.",
+        //   "data": {
+        //     "tasks": {
+        //       "id": 1,
+        //       "title": "Task Title",
+        //       "completed": false,
+        //       "userId": 123
+        //     }
+        //   }
+        // }
     });
 
     // 사용자별 작업 수정

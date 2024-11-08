@@ -7,6 +7,7 @@ import { login as setUpLoginRoute } from './routes/login.mjs';
 import { taskCRUD as setUpTaskRoute } from "./routes/tasks.mjs";
 import cors from 'cors';        // CORS 패키지
 
+
 dotenv.config();
 
 const app = express();
@@ -14,8 +15,9 @@ app.use(express.json());
 
 // 특정 도메인 요청 허용 CORS 설정
 const corsOptions = {
-    origin: 'http://example.com',   // 허용할 도메인
-    optionsSuccessStatus: 200       // 일부 브라우저에서의 CORS 요청 실패 방지
+    origin: 'http://localhost:63342',   // 허용할 도메인
+    credentials: true,
+    // optionsSuccessStatus: 200           // 일부 브라우저에서의 CORS 요청 실패 방지
 };
 
 app.use(cors(corsOptions));
@@ -35,6 +37,8 @@ app.use((req, res, next) => {
 app.use(morganMiddleware);          // 요청 처리 로깅
 app.use(metricsMiddleware);         // Prometheus metrics 기록
 app.use(errorMiddleware);           // 에러 미들웨어 & 에러 로깅
+
+
 
 // application 라우팅 설정
 setUpLoginRoute(app);   // 로그인 엔드포인트

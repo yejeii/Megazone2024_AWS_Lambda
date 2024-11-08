@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.687.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-jwt": "^8.4.1",
@@ -10,6 +11,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "prom-client": "^15.1.3",
+    "stream": "^0.0.3",
     "winston": "^3.16.0",
     "winston-daily-rotate-file": "^5.0.0"
   },

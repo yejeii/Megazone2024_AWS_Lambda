@@ -2,6 +2,30 @@ import winston from "winston";
 import path from "path";
 import fs from "fs";
 import winstonDailyRotate from "winston-daily-rotate-file";
+import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import { Writable } from "stream";
+
+// AWS 설정
+const client = new DynamoDBClient({region: process.env.REGION});
+
+// 로그를 DynamoDB 에 저장
+const saveLogToDynamoDB = async (log) => {
+    const params = {
+        TableName: process.env.DB_TABLE,
+        Item: {
+            id: { S: Date.now().toString() }, // 유니크한 ID 생성
+            log: { S: log }
+        }
+    };
+
+    try {
+        const command = new PutItemCommand(params);
+        const data = await client.send(command);
+        console.log('Log saved to DynamoDB:', data);
+    } catch (err) {
+        console.error('Error saving log to DynamoDB:', err);
+    }
+}
 
 // 로그를 저장할 디렉토리 생성. 없으면 생성
 // 저장경로 : src/logs
@@ -90,6 +114,16 @@ const logger = winston.createLogger({
                 }),
             ),
         }),
+        // DynamoDB로 로그 저장
+        new winston.transports.Stream({
+            stream: new Writable({
+                write: (chunk, encoding, callback) => {
+                    // 로그를 DynamoDB에 저장하는 함수 호출
+                    saveLogToDynamoDB(chunk.toString().trim());
+                    callback();
+                },
+            }),
+        }),
     ],
     exceptionHandlers: [
         // 캐치되지 않은 (정의되지 않은 레벨) 예외를 기록하는 예외 처리기
@@ -106,6 +140,15 @@ const logger = winston.createLogger({
                     return `[${timestamp}] [${level.toUpperCase()}]: ${message}`;
                 }),
             ),
+        }),
+        new winston.transports.Stream({
+            stream: new Writable({
+                write: (chunk, encoding, callback) => {
+                    // 로그를 DynamoDB에 저장하는 함수 호출
+                    saveLogToDynamoDB(chunk.toString().trim());
+                    callback();
+                },
+            }),
         }),
     ],
     exitOnError: false, // 캐치되지 않은 예외를 기록한 후 애플리케이션 실행을 계속합니다.
