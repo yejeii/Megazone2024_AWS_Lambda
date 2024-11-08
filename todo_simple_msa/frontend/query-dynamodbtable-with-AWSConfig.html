@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DynamoDB Logs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>DynamoDB Logs</h1>
+<table id="logsTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Log</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Logs will be inserted here -->
+    </tbody>
+</table>
+
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.814.0.min.js"></script>
+<script>
+    AWS.config.update({
+        region: "REGION",
+        accessKeyId: "ACCESSKEYID",
+        secretAccessKey: "SECRETACCESSKEY",
+    });
+
+    const docClient = new AWS.DynamoDB.DocumentClient();
+    const tableName = "DB_TABLE";
+
+    function fetchLogs() {
+        const params = {
+            TableName: tableName,
+        };
+
+        docClient.scan(params, function (err, data) {
+            if (err) {
+                console.error(
+                    "Unable to scan the table. Error JSON:",
+                    JSON.stringify(err, null, 2)
+                );
+            } else {
+                const tbody = document
+                    .getElementById("logsTable")
+                    .getElementsByTagName("tbody")[0];
+                data.Items.forEach(function (item) {
+                    const row = tbody.insertRow();
+                    const cellId = row.insertCell(0);
+                    const cellLog = row.insertCell(1);
+                    cellId.textContent = item.id;
+                    cellLog.textContent = item.log;
+                });
+            }
+        });
+    }
+
+    window.onload = fetchLogs;
+</script>
+</body>
+</html>
