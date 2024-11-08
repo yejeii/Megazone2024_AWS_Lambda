@@ -25,5 +25,7 @@ notion > IT Studies 데이터베이스 > 2024년 11월에 올린 페이지
   ```c40eaf1b60055dbd203bdb813d87d4178f729c3f```
 * cors 설정 및 DynamoDB 를 이용한 로깅 구현
 
-    ```fc0a5ec6fffa3e290cd97d3bb4295809cdc545c7```
+    1. ```fc0a5ec6fffa3e290cd97d3bb4295809cdc545c7```
+
+    2. ```ee46a907efe56a387ef2fe593bc1bd983d351898```
 
