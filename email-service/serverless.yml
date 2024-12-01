@@ -1,0 +1,35 @@
+service: email-service
+
+frameworkVersion: "3"
+
+custom:
+  secrets: ${file(secrets.json)}
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: ${self:custom.secrets.DEPLOY_STAGE}
+  region: us-east-1
+  environment:
+    DEPLOY_STAGE: ${self:custom.secrets.DEPLOY_STAGE}
+    EMAIL: ${self:custom.secrets.EMAIL}
+    DOMAIN: ${self:custom.secrets.DOMAIN}
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "ses:SendEmail"
+          Resource: "*"
+
+functions:
+  app:
+    handler: handler.send
+    events:
+      - http:
+          path: email/send
+          method: post
+          cors: true
+
+plugins:
+  - serverless-offline
